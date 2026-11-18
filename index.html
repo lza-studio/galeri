@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeri Aplikasi — LZA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f17;--bg2:#111827;--card:#141b29;--line:#232c3d;--txt:#e7ecf5;--mut:#8a96ab;
+  --a1:#22d3ee;--a2:#a78bfa;--a3:#34d399;--a4:#fbbf24;--a5:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(11,15,23,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.3px}
+.logo i{width:34px;height:34px;border-radius:10px;background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a5),var(--a1));display:grid;place-items:center;font-style:normal;color:#0b0f17;font-size:15px}
+.navlinks{display:flex;gap:6px}
+.navlinks a{padding:8px 14px;border-radius:999px;font-size:14px;color:var(--mut);transition:.2s}
+.navlinks a:hover{color:var(--txt);background:var(--bg2)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;border:0;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-p{background:linear-gradient(135deg,var(--a1),var(--a2));color:#0b0f17}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(34,211,238,.6)}
+.btn-g{background:var(--bg2);color:var(--txt);border:1px solid var(--line)}
+.btn-g:hover{border-color:var(--a1)}
+
+/* HERO */
+.hero{position:relative;padding:90px 0 70px;text-align:center;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-40% -20% auto;height:700px;background:radial-gradient(closest-side,rgba(167,139,250,.22),transparent),radial-gradient(closest-side at 70% 40%,rgba(34,211,238,.18),transparent);pointer-events:none}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%);opacity:.35;pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);font-size:13px;color:var(--mut);position:relative}
+.pill b{width:8px;height:8px;border-radius:50%;background:var(--a3);box-shadow:0 0 0 4px rgba(52,211,153,.2);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(52,211,153,0)}}
+.hero h1{position:relative;font-size:clamp(34px,6vw,64px);line-height:1.05;letter-spacing:-2px;font-weight:800;margin:22px auto 18px;max-width:880px}
+.grad{background:linear-gradient(90deg,var(--a1),var(--a2),var(--a5));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{position:relative;color:var(--mut);font-size:clamp(15px,2vw,18px);max-width:640px;margin:0 auto 32px}
+.hero .cta{position:relative;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stats{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:820px;margin:56px auto 0}
+.stat{background:rgba(20,27,41,.7);border:1px solid var(--line);border-radius:16px;padding:18px}
+.stat strong{display:block;font-size:30px;font-weight:800;letter-spacing:-1px}
+.stat span{font-size:13px;color:var(--mut)}
+
+/* SECTION */
+section{padding:60px 0}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.sh h2{font-size:clamp(26px,3.5vw,36px);letter-spacing:-1px;font-weight:800}
+.sh p{color:var(--mut);font-size:15px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+.search{flex:1;min-width:220px;position:relative}
+.search input{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 40px;color:var(--txt);font:inherit;font-size:14px;outline:none}
+.search input:focus{border-color:var(--a1)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--mut);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+.chip:hover{color:var(--txt)}
+.chip.on{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;transition:.25s;display:flex;flex-direction:column;animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--c) 60%,var(--line));box-shadow:0 20px 50px -20px color-mix(in srgb,var(--c) 50%,transparent)}
+.prev{height:170px;position:relative;background:radial-gradient(circle at 30% 0%,color-mix(in srgb,var(--c) 30%,transparent),transparent 70%),#0e1420;padding:18px 18px 0;overflow:hidden}
+.screen{height:100%;background:#0b111c;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;padding:10px;position:relative}
+.dots{display:flex;gap:4px;margin-bottom:9px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.badge{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:rgba(11,15,23,.85);border:1px solid var(--line);z-index:2}
+.badge.live{color:var(--a3)}.badge.soon{color:var(--a5)}.badge.dev{color:var(--a4)}
+.cb{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.cat{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--c)}
+.cb h3{font-size:18px;margin:6px 0 6px;letter-spacing:-.3px}
+.cb p{font-size:14px;color:var(--mut);flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 8px;border-radius:6px;background:var(--bg2);color:var(--mut);border:1px solid var(--line)}
+.empty{text-align:center;color:var(--mut);padding:50px 0;display:none}
+
+/* mini mockups */
+.m-bars{display:flex;align-items:flex-end;gap:5px;height:80px}
+.m-bars i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(var(--c),color-mix(in srgb,var(--c) 30%,transparent));animation:grow 1s both}
+@keyframes grow{from{height:0!important}}
+.m-row{display:flex;gap:6px;margin-bottom:6px}
+.m-row i{height:9px;border-radius:3px;background:var(--line)}
+.m-row i.c{background:var(--c);opacity:.8}
+.m-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.m-kpi i{height:30px;border-radius:6px;background:#141c2b;border:1px solid var(--line);position:relative}
+.m-kpi i:after{content:"";position:absolute;left:6px;bottom:6px;width:55%;height:6px;border-radius:3px;background:var(--c)}
+.m-line svg{width:100%;height:90px}
+.m-qr{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;align-items:center}
+.qr{aspect-ratio:1;border-radius:8px;background:#fff;padding:6px;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;max-width:92px}
+.qr i{background:#0b111c;border-radius:1px}.qr i.o{background:transparent}
+.scanline{position:absolute;left:10px;right:10px;height:2px;background:var(--c);box-shadow:0 0 12px var(--c);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%,100%{top:28px}50%{top:118px}}
+.m-gauge{display:flex;gap:10px;justify-content:center;align-items:center;height:96px}
+.m-gauge svg{width:84px;height:84px}
+.m-flow{display:flex;align-items:center;justify-content:space-between;height:90px;padding:0 4px}
+.node{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 15%,transparent)}
+.wire{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--c) 0 6px,transparent 6px 10px);animation:flow 1s linear infinite;background-size:20px 2px}
+@keyframes flow{to{background-position:20px 0}}
+.m-phone{display:flex;justify-content:center}
+.phone{width:78px;height:130px;border-radius:14px;border:2px solid var(--line);background:#0e1522;padding:8px 6px}
+.phone .m-row i{height:7px}
+
+/* WHY */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.w{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.w .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:14px;background:var(--bg2);border:1px solid var(--line)}
+.w h4{font-size:17px;margin-bottom:6px}.w p{color:var(--mut);font-size:14px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:s}
+.st{padding:22px;border-radius:18px;border:1px dashed var(--line);position:relative}
+.st:before{counter-increment:s;content:"0" counter(s);font-family:'JetBrains Mono';font-size:13px;color:var(--a1)}
+.st h4{margin:8px 0 6px}.st p{font-size:14px;color:var(--mut)}
+
+/* CTA */
+.final{margin:20px 0 60px;border-radius:28px;padding:56px 28px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#132036,#1d1636);border:1px solid var(--line)}
+.final h2{font-size:clamp(26px,4vw,40px);letter-spacing:-1px;margin-bottom:10px}
+.final p{color:var(--mut);margin-bottom:26px}
+.contact{margin-top:16px;font-size:13px;color:var(--mut)}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13px;text-align:center}
+
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(5,8,13,.75);backdrop-filter:blur(6px);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+.ov.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:24px;max-width:640px;width:100%;max-height:90vh;overflow:auto;animation:pop .25s both}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.modal .prev{height:200px}
+.mb{padding:24px}
+.mb h3{font-size:24px;letter-spacing:-.5px;margin:6px 0 8px}
+.mb>p{color:var(--mut)}
+.feat{margin:18px 0;display:grid;gap:9px}
+.feat li{list-style:none;display:flex;gap:10px;font-size:14px}
+.feat li:before{content:"✓";color:var(--c);font-weight:800}
+.mrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.x{position:sticky;top:12px;float:right;margin:12px 12px 0 0;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--txt);cursor:pointer;font-size:18px;z-index:3}
+.benef{background:var(--bg2);border-radius:14px;padding:14px 16px;font-size:14px;border-left:3px solid var(--c)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--txt);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;z-index:200;transition:.3s}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:720px){
+  .navlinks{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:60px 0 40px}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#top" class="logo"><i>L</i>LZA Apps</a>
+  <div class="navlinks"><a href="#galeri">Galeri</a><a href="#kenapa">Keunggulan</a><a href="#alur">Cara Order</a></div>
+  <a href="#kontak" class="btn btn-p">Konsultasi</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="grid-bg"></div>
+  <span class="pill"><b></b> Dipakai langsung di lantai produksi</span>
+  <h1>Aplikasi yang <span class="grad">beneran dipakai</span>, bukan cuma demo.</h1>
+  <p>Kumpulan aplikasi web, IoT &amp; otomasi buatan LZA — dari monitoring mesin SMD, checklist QR, sampai aplikasi kas RT dan masjid. Dibuat dari masalah nyata di lapangan.</p>
+  <div class="cta">
+    <a href="#galeri" class="btn btn-p">Lihat Aplikasi →</a>
+    <a href="#kontak" class="btn btn-g">Request Aplikasi</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong id="nApp">0</strong><span>Aplikasi dibuat</span></div>
+    <div class="stat"><strong id="nLive">0</strong><span>Sudah live dipakai</span></div>
+    <div class="stat"><strong>24/7</strong><span>Monitoring real-time</span></div>
+    <div class="stat"><strong>0</strong><span>Kertas checklist</span></div>
+  </div>
+</header>
+
+<section id="galeri"><div class="wrap">
+  <div class="sh">
+    <div><h2>Galeri Aplikasi</h2><p>Klik kartu untuk lihat detail fitur dan manfaatnya.</p></div>
+  </div>
+  <div class="tools">
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" placeholder="Cari aplikasi… (mis. feeder, kas, QR)">
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="cards" id="cards"></div>
+  <div class="empty" id="empty">Tidak ada aplikasi yang cocok. Coba kata lain, bro.</div>
+</div></section>
+
+<section id="kenapa"><div class="wrap">
+  <div class="sh"><div><h2>Kenapa aplikasi ini beda?</h2><p>Dibangun oleh orang produksi, untuk orang produksi.</p></div></div>
+  <div class="why">
+    <div class="w"><div class="ic">🏭</div><h4>Lahir dari lapangan</h4><p>Setiap aplikasi berangkat dari masalah nyata: NG berulang, data tercecer di Excel, leader lupa cek.</p></div>
+    <div class="w"><div class="ic">⚡</div><h4>Ringan &amp; jalan di jaringan lokal</h4><p>Bisa jalan di PC biasa / server lokal pabrik tanpa langganan cloud mahal.</p></div>
+    <div class="w"><div class="ic">📱</div><h4>Cukup scan &amp; klik</h4><p>QR, barcode, dan tampilan HP-friendly. Operator tidak perlu training lama.</p></div>
+    <div class="w"><div class="ic">📊</div><h4>Data langsung jadi laporan</h4><p>Rekap otomatis, export Excel, dashboard real-time untuk atasan.</p></div>
+  </div>
+</div></section>
+
+<section id="alur"><div class="wrap">
+  <div class="sh"><div><h2>Cara request aplikasi</h2><p>Simpel, 4 langkah.</p></div></div>
+  <div class="steps">
+    <div class="st"><h4>Ceritakan masalahnya</h4><p>Kirim contoh form / Excel yang sekarang dipakai.</p></div>
+    <div class="st"><h4>Rancang alur</h4><p>Kita sepakati fitur &amp; tampilan sebelum mulai.</p></div>
+    <div class="st"><h4>Demo &amp; revisi</h4><p>Coba langsung, revisi sampai pas dengan kebutuhan.</p></div>
+    <div class="st"><h4>Go live</h4><p>Instal, serah terima, dan pendampingan awal.</p></div>
+  </div>
+</div></section>
+
+<div class="wrap" id="kontak">
+  <div class="final">
+    <h2>Punya proses yang masih manual?</h2>
+    <p>Ubah jadi aplikasi. Konsultasi dulu, gratis.</p>
+    <a class="btn btn-p" id="waBtn" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+    <div class="contact" id="contactTxt"></div>
+  </div>
+</div>
+
+<footer>© <span id="yr"></span> LZA · Galeri Aplikasi</footer>
+
+<div class="ov" id="ov"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ EDIT DI SINI ============ */
+const KONTAK = { wa: "6282318499690", nama: "LZA", email: "" }; // ganti nomor WA (format 62…)
+
+const APPS = [
+ {n:"SMD Monitoring Control",cat:"Pabrik",s:"live",ui:"kpi",c:"#22d3ee",
+  d:"Dashboard counter produksi SMD real-time per line, lengkap dengan target vs aktual.",
+  f:["Counter output per line otomatis","Target vs aktual per jam","Portal setup line & model","Tampilan TV untuk di area produksi"],
+  b:"Leader & atasan bisa lihat kondisi line tanpa harus jalan ke lapangan.",t:["Flask","Real-time","Dashboard"],link:""},
+ {n:"Material Scan & Label",cat:"Pabrik",s:"live",ui:"scan",c:"#34d399",
+  d:"Scan barcode reel material SMD, cetak label, dan verifikasi feeder sebelum produksi.",
+  f:["Scan barcode reel","Cetak label otomatis","Verifikasi material vs feeder","Dashboard mounter"],
+  b:"Mencegah salah pasang material — sumber NG paling mahal di SMD.",t:["Flask","Barcode","Printer"],link:""},
+ {n:"Feeder Calibration",cat:"Pabrik",s:"live",ui:"list",c:"#a78bfa",
+  d:"Pencatatan kalibrasi feeder SMD: scan serial, counter pemakaian, status NG, dan riwayat.",
+  f:["Scan serial feeder","Counter & jadwal kalibrasi","Catat NG & perbaikan","Riwayat per feeder"],
+  b:"Feeder bermasalah ketahuan sebelum bikin pick-up error.",t:["Web App","Scan","History"],link:""},
+ {n:"Feeder List Viewer",cat:"Pabrik",s:"live",ui:"list",c:"#60a5fa",
+  d:"Semua feeder list per line & model dalam satu web — bisa dibuka dan dicetak dari PC mana saja.",
+  f:["Feeder list semua line","Cari per model","Cetak langsung","Upload tambahan list baru"],
+  b:"Tidak ada lagi file Excel beda versi di tiap PC.",t:["Web App","Print"],link:""},
+ {n:"Metal Mask Tracking",cat:"Pabrik",s:"live",ui:"qr",c:"#f472b6",
+  d:"Lacak metal mask/stencil: lokasi, jumlah pemakaian, pembersihan, dan status kelayakan.",
+  f:["Scan QR metal mask","Hitung jumlah print","Riwayat cleaning & tension","Peringatan batas umur pakai"],
+  b:"Kualitas printing solder terjaga, stencil tidak dipakai melebihi umur.",t:["QR","Tracking"],link:""},
+ {n:"Reflow Live Monitor",cat:"Pabrik",s:"live",ui:"line",c:"#fb923c",
+  d:"Grafik profil suhu mesin reflow secara live, dibaca langsung dari log mesin.",
+  f:["Grafik suhu per zona","Baca log mesin otomatis","Alarm di luar spesifikasi","Riwayat profil"],
+  b:"Profil reflow bisa dipantau tanpa berdiri di depan mesin.",t:["Python","Chart","IoT"],link:""},
+ {n:"X-Ray Inspection History",cat:"Pabrik",s:"dev",ui:"list",c:"#94a3b8",
+  d:"Riwayat hasil inspeksi X-ray SMD, pengganti log Excel manual.",
+  f:["Input hasil inspeksi","Cari per model / lot","Rekap OK/NG","Export Excel"],
+  b:"Data inspeksi rapi dan bisa ditelusuri saat ada komplain.",t:["Web App","Excel"],link:""},
+ {n:"AOI & SPI Monitoring",cat:"Pabrik",s:"dev",ui:"bars",c:"#22d3ee",
+  d:"Database & dashboard hasil AOI/SPI — membaca file SPC mesin, lalu jadi tren NG per komponen.",
+  f:["Import file SPC otomatis","Top defect per komponen","Tren NG harian","Filter line & model"],
+  b:"Tahu komponen mana yang paling sering NG, langsung bisa action.",t:["Python","Database","Chart"],link:""},
+ {n:"QR Machine Checklist",cat:"Pabrik",s:"live",ui:"qr",c:"#34d399",
+  d:"Checklist inspeksi mesin cukup scan QR di mesin — tanpa kertas, ada bukti waktu & siapa yang cek.",
+  f:["Scan QR per mesin","Checklist harian / mingguan","Rekap kepatuhan","Laporan PDF"],
+  b:"Checklist benar-benar dikerjakan, bukan diisi asal di akhir shift.",t:["QR","PDF","Paperless"],link:""},
+ {n:"Leader Patrol Checklist",cat:"Pabrik",s:"dev",ui:"phone",c:"#fbbf24",
+  d:"Pengingat & checklist patrol leader: SOP operator, kebersihan jig, dan titik kritis proses.",
+  f:["Checklist per jam / shift","Foto temuan","Status follow-up","Rekap per leader"],
+  b:"Mengurangi NG akibat leader lupa cek titik kritis.",t:["Mobile","Checklist"],link:""},
+ {n:"Suhu & Kelembapan IoT",cat:"Pabrik",s:"live",ui:"gauge",c:"#60a5fa",
+  d:"Sensor WiFi untuk memantau suhu & kelembapan area produksi, data masuk ke server otomatis.",
+  f:["Sensor WiFi murah","Grafik per area","Alarm di luar batas","Riwayat data"],
+  b:"Kondisi ruang SMD (pasta solder, MSD) terpantau 24 jam.",t:["ESP32","IoT","Sensor"],link:""},
+ {n:"Solder Paste Tracking",cat:"Pabrik",s:"dev",ui:"flow",c:"#f472b6",
+  d:"Lacak pasta solder dari Material Control: thawing, buka, sampai habis dipakai di line.",
+  f:["Barcode per jar","Timer thawing & open time","Peringatan kadaluarsa","Jejak per line"],
+  b:"Pasta solder kadaluarsa tidak sampai ke mesin printer.",t:["Barcode","Tracking"],link:""},
+ {n:"SMD Daily Report",cat:"Pabrik",s:"dev",ui:"bars",c:"#a78bfa",
+  d:"Laporan harian produksi SMD pengganti Excel leader: performance, NG repair, efisiensi mesin.",
+  f:["Input laporan per shift","Performance & efisiensi","Rekap NG repair","Dashboard atasan"],
+  b:"Laporan selesai di akhir shift, bukan besok pagi.",t:["Dashboard","Report"],link:""},
+ {n:"Training & Skill Matrix",cat:"Pabrik",s:"dev",ui:"kpi",c:"#fb923c",
+  d:"Sistem training operator dari skill matrix: jadwal, hasil evaluasi, dan sertifikasi proses.",
+  f:["Skill matrix per operator","Jadwal training","Nilai evaluasi","Status sertifikasi"],
+  b:"Penempatan operator sesuai skill, audit lebih mudah.",t:["HR","Matrix"],link:""},
+ {n:"Kontrol Consumable",cat:"Pabrik",s:"live",ui:"list",c:"#34d399",
+  d:"Kontrol stok & pemakaian consumable produksi, plus rencana produksi PPIC.",
+  f:["Stok masuk / keluar","Pemakaian per line","Alert stok minimum","Rencana produksi"],
+  b:"Consumable tidak tiba-tiba habis di tengah produksi.",t:["Flask","Stok"],link:""},
+ {n:"Aplikasi Warga RT",cat:"Komunitas",s:"live",ui:"phone",c:"#22d3ee",
+  d:"Aplikasi warga perumahan: iuran, kas RT, pengumuman, dan data warga dalam satu aplikasi HP.",
+  f:["Iuran & status bayar per rumah","Kas masuk / keluar transparan","Pengumuman warga","Login pengurus"],
+  b:"Keuangan RT transparan, warga bisa cek sendiri kapan saja.",t:["Supabase","PWA","Vercel"],link:"https://warga-villa-athaland.vercel.app/"},
+ {n:"Quick Count RT",cat:"Komunitas",s:"live",ui:"bars",c:"#fb923c",
+  d:"Hitung cepat suara pemilihan ketua RT secara real-time — hasil langsung tampil di layar.",
+  f:["Input suara per TPS / kotak","Grafik perolehan real-time","Persentase otomatis","Tampilan layar besar untuk warga"],
+  b:"Penghitungan suara transparan, warga bisa pantau langsung.",t:["Web App","Real-time","Vercel"],link:"https://quick-count-rt.vercel.app/"},
+ {n:"Kas Gang / Lingkungan",cat:"Komunitas",s:"live",ui:"bars",c:"#fbbf24",
+  d:"Pencatatan kas lingkungan: pemasukan, pengeluaran, rekap iuran per rumah, unduh Excel.",
+  f:["Catat pemasukan & pengeluaran","Rekap iuran per rumah","Saldo otomatis","Download Excel"],
+  b:"Bendahara tidak lagi pusing hitung manual tiap bulan.",t:["Web App","Excel"],link:"https://kas-siliwangi.vercel.app/"},
+ {n:"Keuangan DKM Masjid",cat:"Komunitas",s:"live",ui:"kpi",c:"#34d399",
+  d:"Keuangan masjid: pengajuan anggaran per bidang, keropak Jumat, dan iuran jamaah.",
+  f:["Pengajuan & approval anggaran","Catat keropak Jumat","Laporan kas transparan","Akses per bidang"],
+  b:"Laporan keuangan masjid rapi dan bisa diumumkan tiap Jumat.",t:["Supabase","PWA"],link:"https://dkm-turayah.vercel.app/"},
+ {n:"Koperasi Karyawan",cat:"Komunitas",s:"dev",ui:"phone",c:"#a78bfa",
+  d:"Aplikasi koperasi karyawan: anggota, simpanan, belanja kantin, dan laporan.",
+  f:["Data anggota","Simpanan pokok / wajib","Transaksi kantin","Laporan SHU"],
+  b:"Koperasi dikelola profesional sejak hari pertama.",t:["PWA","Koperasi"],link:""},
+ {n:"Otomasi Affiliate (n8n)",cat:"Otomasi",s:"live",ui:"flow",c:"#f472b6",
+  d:"Workflow otomatis cari produk affiliate, buat konten, dan posting ke media sosial.",
+  f:["Discovery produk otomatis","Generate caption","Jadwal posting","Retry otomatis bila gagal"],
+  b:"Jualan affiliate jalan terus walau sedang kerja.",t:["n8n","AI","Automation"],link:""},
+ {n:"Kasir UMKM + QRIS",cat:"UMKM",s:"soon",ui:"kpi",c:"#34d399",
+  d:"Aplikasi kasir untuk warung, kedai kopi, dan kantin — stok otomatis berkurang, laporan harian langsung jadi.",
+  f:["Transaksi cepat dari HP / tablet","Pembayaran tunai & QRIS","Stok berkurang otomatis","Laporan omzet harian / bulanan"],
+  b:"Pemilik usaha tahu untung-rugi tiap hari tanpa hitung manual.",t:["POS","QRIS","PWA"],link:""},
+ {n:"Katalog Online + Order WA",cat:"UMKM",s:"soon",ui:"phone",c:"#f472b6",
+  d:"Toko online sederhana dengan link sendiri — pelanggan pilih barang, pesanan langsung masuk ke WhatsApp.",
+  f:["Katalog produk + foto & harga","Keranjang belanja","Pesanan otomatis jadi chat WA","Link toko siap share ke medsos"],
+  b:"Jualan lebih rapi tanpa biaya marketplace.",t:["Katalog","WhatsApp"],link:""},
+ {n:"Booking Lapangan Padel / Futsal",cat:"UMKM",s:"soon",ui:"bars",c:"#22d3ee",
+  d:"Reservasi lapangan, barbershop, atau rental secara online — jadwal kosong terlihat langsung.",
+  f:["Kalender slot kosong real-time","Booking & DP online","Pengingat jadwal ke pelanggan","Rekap pendapatan"],
+  b:"Tidak ada lagi jadwal bentrok atau booking dobel lewat chat.",t:["Booking","Kalender"],link:""},
+ {n:"Tracking Laundry / Servis",cat:"UMKM",s:"soon",ui:"flow",c:"#60a5fa",
+  d:"Pelanggan cek status cucian atau barang servis sendiri lewat link — dari diterima sampai siap ambil.",
+  f:["Nota digital + QR","Status proses real-time","Notifikasi siap diambil","Rekap order & pendapatan"],
+  b:"Pelanggan tidak perlu bolak-balik tanya \"udah jadi belum?\".",t:["Tracking","QR"],link:""},
+ {n:"Absensi QR + GPS",cat:"UMKM",s:"soon",ui:"qr",c:"#fbbf24",
+  d:"Absensi karyawan pakai scan QR dan lokasi GPS — cocok untuk UMKM dan proyek lapangan.",
+  f:["Scan QR di lokasi kerja","Validasi lokasi GPS","Rekap jam masuk / pulang","Export untuk penggajian"],
+  b:"Tidak perlu mesin fingerprint mahal, titip absen pun bisa dicegah.",t:["QR","GPS","HR"],link:""},
+ {n:"Arisan Digital",cat:"Komunitas",s:"soon",ui:"gauge",c:"#a78bfa",
+  d:"Kelola arisan: setoran tiap anggota, kocokan online, dan siapa yang sudah dapat.",
+  f:["Daftar anggota & setoran","Kocokan acak transparan","Riwayat pemenang","Pengingat jatuh tempo"],
+  b:"Arisan rapi, tidak ada lagi salah catat atau saling curiga.",t:["Komunitas","PWA"],link:""},
+ {n:"Tagihan Kos / Kontrakan",cat:"Komunitas",s:"soon",ui:"list",c:"#fb923c",
+  d:"Catat penghuni, tagihan bulanan, dan bukti bayar kos atau kontrakan.",
+  f:["Data kamar & penghuni","Tagihan otomatis tiap bulan","Upload bukti transfer","Pengingat jatuh tempo"],
+  b:"Pemilik kos tidak perlu nagih satu per satu.",t:["Properti","Tagihan"],link:""},
+ {n:"Panitia Qurban & Zakat",cat:"Komunitas",s:"soon",ui:"scan",c:"#34d399",
+  d:"Pendaftaran pequrban, kupon daging dengan QR, dan laporan zakat yang transparan.",
+  f:["Pendaftaran pequrban / muzakki","Kupon pembagian scan QR","Data mustahik","Laporan untuk jamaah"],
+  b:"Pembagian tertib, tidak ada kupon dobel.",t:["Masjid","QR","Laporan"],link:""},
+ {n:"Bank Sampah / Posyandu",cat:"Komunitas",s:"soon",ui:"bars",c:"#60a5fa",
+  d:"Pencatatan setoran bank sampah per warga atau data timbang balita posyandu.",
+  f:["Data nasabah / balita","Catat setoran / penimbangan","Saldo & grafik perkembangan","Laporan ke kelurahan"],
+  b:"Kader dan pengurus tidak lagi repot dengan buku catatan.",t:["Kelurahan","Laporan"],link:""},
+ {n:"Chatbot WA AI untuk Toko",cat:"AI",s:"soon",ui:"flow",c:"#f472b6",
+  d:"Asisten AI di WhatsApp yang menjawab pertanyaan pelanggan 24 jam — harga, stok, dan cara order.",
+  f:["Balas otomatis 24 jam","Jawab dari daftar produk","Teruskan ke admin bila perlu","Rekap pertanyaan terbanyak"],
+  b:"Chat pelanggan terbalas walau pemilik sedang sibuk.",t:["AI","n8n","WhatsApp"],link:""}
+];
+/* ====================================== */
+
+const $=s=>document.querySelector(s);
+const cats=["Semua",...new Set(APPS.map(a=>a.cat))];
+let cur="Semua";
+
+function mock(a){
+  const r=(w,c)=>`<i class="${c?'c':''}" style="width:${w}%"></i>`;
+  switch(a.ui){
+    case"bars":return`<div class="m-bars">${[45,70,38,88,60,95,52,78].map((h,i)=>`<i style="height:${h}%;animation-delay:${i*.06}s"></i>`).join("")}</div>`;
+    case"kpi":return`<div class="m-kpi"><i></i><i></i><i></i></div><div class="m-bars" style="height:52px">${[40,65,50,80,70,90,60,85,75,95].map(h=>`<i style="height:${h}%"></i>`).join("")}</div>`;
+    case"line":return`<div class="m-line"><svg viewBox="0 0 200 90" preserveAspectRatio="none"><defs><linearGradient id="g${a.n.length}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${a.c}" stop-opacity=".45"/><stop offset="1" stop-color="${a.c}" stop-opacity="0"/></linearGradient></defs><path d="M0,80 C30,78 40,55 70,50 S110,45 125,20 S160,15 175,40 S195,70 200,75 L200,90 L0,90Z" fill="url(#g${a.n.length})"/><path d="M0,80 C30,78 40,55 70,50 S110,45 125,20 S160,15 175,40 S195,70 200,75" fill="none" stroke="${a.c}" stroke-width="2.5"/></svg></div>`;
+    case"qr":{const p="1111111100000110111011011101101110110000011111111".split("");return`<div class="m-qr"><div class="qr">${p.map((v,i)=>`<i class="${(v==='1'||(i*7%5==0))?'':'o'}"></i>`).join("")}</div><div>${[[80,1],[60],[90],[50,1],[70]].map(([w,c])=>`<div class="m-row">${r(w,c)}</div>`).join("")}</div></div>`}
+    case"scan":return`<div class="scanline"></div>${[[30,1,55],[30,0,60],[30,0,45],[30,1,70],[30,0,50],[30,0,65]].map(([a1,c,b])=>`<div class="m-row">${r(a1,c)}${r(b)}</div>`).join("")}`;
+    case"gauge":return`<div class="m-gauge">${[[72,"°C"],[55,"%"]].map(([v])=>`<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#232c3d" stroke-width="3.5"/><circle cx="18" cy="18" r="15" fill="none" stroke="${a.c}" stroke-width="3.5" stroke-dasharray="${v*.94} 94" stroke-linecap="round" transform="rotate(-90 18 18)"/><text x="18" y="21" text-anchor="middle" font-size="8" fill="#e7ecf5" font-family="Plus Jakarta Sans" font-weight="700">${v}</text></svg>`).join("")}</div>`;
+    case"flow":return`<div class="m-flow"><div class="node"></div><div class="wire"></div><div class="node"></div><div class="wire"></div><div class="node"></div></div>`;
+    case"phone":return`<div class="m-phone"><div class="phone">${[[60,1],[90],[75],[40,1],[85],[65]].map(([w,c])=>`<div class="m-row">${r(w,c)}</div>`).join("")}</div></div>`;
+    default:return[[100,1],[85],[92],[70],[88],[60]].map(([w,c],i)=>`<div class="m-row">${r(14,i%2)}${r(w*.7,c)}</div>`).join("");
+  }
+}
+const prev=a=>`<div class="prev" style="--c:${a.c}"><span class="badge ${a.s}">${a.s==="live"?"● Live":a.s==="soon"?"✦ Segera Hadir":"◐ Pengembangan"}</span><div class="screen"><div class="dots"><i></i><i></i><i></i></div>${mock(a)}</div></div>`;
+
+function render(){
+  const q=$("#q").value.toLowerCase().trim();
+  const list=APPS.filter(a=>(cur==="Semua"||a.cat===cur)&&(!q||(a.n+a.d+a.t.join(" ")+a.cat).toLowerCase().includes(q)));
+  $("#cards").innerHTML=list.map((a,i)=>`<article class="card" style="--c:${a.c};animation-delay:${i*.04}s" data-i="${APPS.indexOf(a)}">${prev(a)}<div class="cb"><span class="cat">${a.cat}</span><h3>${a.n}</h3><p>${a.d}</p><div class="tags">${a.t.map(t=>`<span>${t}</span>`).join("")}</div></div></article>`).join("");
+  $("#empty").style.display=list.length?"none":"block";
+}
+$("#chips").innerHTML=cats.map(c=>`<button class="chip ${c===cur?'on':''}">${c}</button>`).join("");
+$("#chips").onclick=e=>{if(!e.target.classList.contains("chip"))return;cur=e.target.textContent;document.querySelectorAll(".chip").forEach(b=>b.classList.toggle("on",b===e.target));render()};
+$("#q").oninput=render;
+
+const waLink=t=>`https://wa.me/${KONTAK.wa}?text=${encodeURIComponent(t)}`;
+$("#cards").onclick=e=>{
+  const c=e.target.closest(".card");if(!c)return;const a=APPS[c.dataset.i];
+  $("#modal").style.setProperty("--c",a.c);
+  $("#modal").innerHTML=`<button class="x" id="x">×</button>${prev(a)}<div class="mb"><span class="cat" style="color:${a.c}">${a.cat} · ${a.s==="live"?"Sudah dipakai":a.s==="soon"?"Segera hadir — bisa pesan duluan":"Sedang dikembangkan"}</span><h3>${a.n}</h3><p>${a.d}</p><ul class="feat">${a.f.map(x=>`<li>${x}</li>`).join("")}</ul><div class="benef"><b>Manfaat:</b> ${a.b}</div><div class="tags">${a.t.map(t=>`<span>${t}</span>`).join("")}</div><div class="mrow">${a.link?`<a class="btn btn-g" href="${a.link}" target="_blank" rel="noopener">Buka Demo ↗</a>`:""}<a class="btn btn-p" href="${waLink(`Halo ${KONTAK.nama}, ${a.s==="soon"?`saya mau pesan duluan aplikasi "${a.n}".`:`saya tertarik dengan aplikasi "${a.n}". Bisa minta info / demo?`}`)}" target="_blank" rel="noopener">💬 ${a.s==="soon"?"Pesan duluan":"Saya tertarik"}</a><button class="btn btn-g" id="cp">Salin info</button></div></div>`;
+  $("#ov").classList.add("on");
+  $("#x").onclick=close;
+  $("#cp").onclick=async()=>{try{await navigator.clipboard.writeText(`${a.n}\n${a.d}\n\nFitur:\n- ${a.f.join("\n- ")}\n\nManfaat: ${a.b}`);toast("Info aplikasi disalin")}catch{toast("Gagal menyalin")}};
+};
+function close(){$("#ov").classList.remove("on")}
+$("#ov").onclick=e=>{if(e.target.id==="ov")close()};
+document.onkeydown=e=>{if(e.key==="Escape")close()};
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800)}
+
+$("#waBtn").href=waLink(`Halo ${KONTAK.nama}, saya mau konsultasi bikin aplikasi.`);
+$("#contactTxt").textContent=`WhatsApp: +${KONTAK.wa}${KONTAK.email?" · "+KONTAK.email:""}`;
+$("#yr").textContent=new Date().getFullYear();
+
+function count(el,to){let n=0;const s=setInterval(()=>{n++;el.textContent=n;if(n>=to)clearInterval(s)},45)}
+count($("#nApp"),APPS.length);count($("#nLive"),APPS.filter(a=>a.s==="live").length);
+render();
+</script>
+</body>
+</html>
